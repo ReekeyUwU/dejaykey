@@ -3,8 +3,16 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>DeJay | Link-Portal</title>
+  <title>reekey | Link-Portal</title>
   
+  <meta property="og:title" content="Reekey's Link-Portal | Alle Profile & Links">
+  <meta property="og:site_name" content="reekey.de">
+  <meta property="og:description" content="Welcome to my official link portal! 🐾">
+  <meta property="og:image" content="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp">
+  <meta property="og:url" content="https://reekey.de/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/webp" href="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <style>
@@ -27,7 +35,7 @@
     
     .bg-layer { 
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
-        background-image: url("https://dejaykey.de/photo_2026-05-27_23-57-59.jpg"); 
+        background-image: url("https://reekey.de/84bdc93d-a924-42a8-829d-8ceafa6314fd.webp"); 
         background-size: cover; background-position: center; 
         background-attachment: fixed; z-index: 1; pointer-events: none;
     }
@@ -59,7 +67,7 @@
     
     .social-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
     .social-icon { width: 42px; height: 42px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--gold); text-decoration: none; margin: 5px; transition: 0.3s; }
-    .social-icon:hover { background: var(--gold); color: black; }
+    .social-icon:hover { background: var(--gold); color: black; transform: scale(1.1); }
     
     .links-card { 
         background: linear-gradient(90deg, var(--royal-purple) 0%, #000 100%); 
@@ -67,41 +75,55 @@
         font-weight: 600; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer; transition: 0.3s;
     }
     .links-card:hover { border-color: var(--neon-green); transform: scale(1.02); }
+    .badge-18 { font-size: 11px; background: var(--royal-purple); color: white; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--gold); }
     
+    .age-gate-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; justify-content: center; align-items: center; }
     .footer { margin-top: 30px; color: var(--gold); font-size: 14px; text-align: center; }
     .footer a { color: var(--neon-green); text-decoration: none; }
   </style>
 </head>
 <body>
 
+  <div id="age-gate" class="age-gate-overlay">
+    <div style="background:#111; border:2px solid var(--gold); border-radius:20px; padding:40px; text-align:center;">
+      <h2 style="color:white; margin-bottom: 20px;">Confirm Age</h2>
+      <button onclick="go()" style="padding:12px 35px; background:var(--gold); border:none; font-weight:bold; cursor:pointer;">Yes (18+)</button>
+      <button onclick="hide()" style="padding:12px 35px; background:transparent; color:white; border:1px solid white; cursor:pointer; margin-left:10px;">Close</button>
+    </div>
+  </div>
+
   <div class="bg-layer"></div>
   <div class="main-wrapper">
     <div class="profile-card">
-      <div class="avatar-box"><img class="avatar-img" src="https://dejaykey.de/photo_2026-05-27_23-50-28.jpg"></div>
-      <h1>DeJay</h1>
+      <div class="avatar-box"><img class="avatar-img" src="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp"></div>
+      <h1>reekey</h1>
       <div class="sub-bio">Hey, glad you found your way here. I'm Reekey, a 27-year-old furry from Germany. 🐾</div>
       
-      <div class="guns-discord-widget" onclick="track('Discord_Profile', 'https://discord.com/users/1209220675303379046')">
+      <div class="guns-discord-widget" onclick="track('Discord_Profile', 'https://discord.com/users/1104903295438434365')">
         <div style="position:relative;">
-            <img style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:2px solid var(--neon-green);" src="https://dejaykey.de/photo_2026-05-27_23-50-28.jpg">
+            <img style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:2px solid var(--neon-green);" src="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp">
             <div id="widget-dot" class="widget-status-dot"></div>
         </div>
         <div style="color:white; text-align:left; margin-left:15px;">
-            <div style="font-weight:700;">Evil_DeJay</div>
+            <div style="font-weight:700;">reekey_</div>
             <div id="widget-activity" style="color:var(--neon-green); font-size:12px; font-weight:600;">Loading...</div>
         </div>
       </div>
-
+      
       <div class="social-row">
-        <a class="social-icon" onclick="track('Discord', 'https://discord.com/users/1209220675303379046')"><i class="fab fa-discord"></i></a>
-        <a class="social-icon" onclick="track('Instagram', 'https://www.instagram.com/evil_dejay')"><i class="fab fa-instagram"></i></a>
-        <a class="social-icon" onclick="track('Telegram', 'https://t.me/EvilDejay')"><i class="fab fa-telegram"></i></a>
+        <a class="social-icon" onclick="track('Discord', 'https://discord.com/invite/nRTbXGepUT')"><i class="fab fa-discord"></i></a>
+        <a class="social-icon" onclick="track('Instagram', 'https://instagram.com/reekeyuwu')"><i class="fab fa-instagram"></i></a>
+        <a class="social-icon" onclick="track('TikTok', 'https://tiktok.com/@reekey')"><i class="fab fa-tiktok"></i></a>
+        <a class="social-icon" onclick="track('Bluesky', 'https://bsky.app/profile/reekey.de')"><img src="https://cdn.simpleicons.org/bluesky" alt="Bluesky"></a>
+        <a class="social-icon" onclick="track('Telegram', 'https://t.me/reekeyuwu')"><i class="fab fa-telegram"></i></a>
+        <a class="social-icon" onclick="gate('https://t.me/reekeyad', 'Telegram_Channel_Ads')"><i class="fab fa-telegram" style="color:white;"></i></a>
       </div>
       
       <div class="btn-list">
-        <div class="links-card" onclick="track('Main', 'http://www.winters-embrace.com/')">
-            <span>Winters Embrace</span>
-        </div>
+        <div class="links-card" onclick="gate('https://onlyfans.com/reekeyuwu', 'OnlyFans')">OnlyFans <span class="badge-18">18+</span></div>
+        <div class="links-card" onclick="track('X_Twitter', 'https://x.com/reekey_')">X (Twitter)</div>
+        <div class="links-card" onclick="gate('https://t.me/s/reekeyad', 'Telegram_Channel')">Telegram Channel <span class="badge-18">18+</span></div>
+        <div class="links-card" onclick="gate('https://murrtube.net/reekey', 'Murrtube')">Murrtube <span class="badge-18">18+</span></div>
       </div>
       
       <div class="footer">
@@ -111,14 +133,19 @@
   </div>
 
   <script>
-    const TRACKER_URL = 'https://link-tracker2.morning-surf-02e1.workes.dev/';
+    let url = "";
+    const TRACKER_URL = 'https://link-tracker2.morning-surf-02e1.workers.dev/';
+
     function track(name, u) { fetch(TRACKER_URL, { method: 'POST', body: JSON.stringify({ link: name }) }); if (u) window.open(u, '_blank'); }
+    function gate(u, name) { url = u; fetch(TRACKER_URL, { method: 'POST', body: JSON.stringify({ link: name }) }); document.getElementById('age-gate').style.display='flex'; }
+    function hide() { document.getElementById('age-gate').style.display='none'; }
+    function go() { window.open(url, '_blank'); hide(); }
     
-    fetch('https://empty-rice-011f.morning-surf-02e1.workes.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
+    fetch('https://empty-rice-011f.morning-surf-02e1.workers.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
     
     async function updateStatus() {
         try {
-            const res = await fetch('https://api.lanyard.rest/v1/users/1209220675303379046');
+            const res = await fetch('https://api.lanyard.rest/v1/users/1104903295438434365');
             const json = await res.json();
             if (json.success) {
                 const d = json.data;
