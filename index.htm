@@ -5,14 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>DeJay | Link-Portal</title>
   
-  <meta property="og:title" content="Reekey's Link-Portal | Alle Profile & Links">
-  <meta property="og:site_name" content="reekey.de">
-  <meta property="og:description" content="Welcome to my official link portal! 🐾">
-  <meta property="og:image" content="https://dejaykey.de/photo_2026-05-27_23-57-59.jpg">
-  <meta property="og:url" content="https://reekey.de/">
-  <meta property="og:type" content="website">
-
-  <link rel="icon" type="image/webp" href="https://dejaykey.de/photo_2026-05-27_23-50-28.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
   <style>
@@ -48,13 +40,18 @@
         border-radius: 20px; border: 2px solid var(--gold); 
         padding: 35px 25px 50px 25px; text-align: center; position: relative; 
         box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
-        animation: slideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    .avatar-box { 
+        width: 130px; height: 130px; margin: 0 auto 20px auto; 
+        position: relative; overflow: hidden; border-radius: 35px;
+    }
+    .avatar-img { 
+        width: 100%; height: 100%; object-fit: cover; 
+        border: 3px solid var(--gold); box-shadow: 0 0 20px var(--neon-green);
     }
     
-    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    
-    .avatar-img { width: 130px; height: 130px; border-radius: 35px; object-fit: cover; border: 3px solid var(--gold); box-shadow: 0 0 20px var(--neon-green); }
-    h1 { font-size: 39.5px; font-weight: 600; color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+    h1 { font-size: 39.5px; font-weight: 600; color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); margin: 0 0 5px 0; }
     .sub-bio { color: var(--gold); font-size: 16px; margin: 5px 0 20px 0; font-weight: 500; }
     
     .guns-discord-widget { background: rgba(0, 0, 0, 0.6); border-radius: 20px; padding: 12px 20px; margin: 0 auto 25px auto; width: 100%; max-width: 310px; display: flex; align-items: center; border: 1px solid var(--gold); cursor: pointer; }
@@ -70,22 +67,12 @@
         font-weight: 600; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer; transition: 0.3s;
     }
     .links-card:hover { border-color: var(--neon-green); transform: scale(1.02); }
-    .badge-18 { font-size: 11px; background: var(--royal-purple); color: white; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--gold); }
     
-    .age-gate-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; justify-content: center; align-items: center; }
     .footer { margin-top: 30px; color: var(--gold); font-size: 14px; text-align: center; }
     .footer a { color: var(--neon-green); text-decoration: none; }
   </style>
 </head>
 <body>
-
-  <div id="age-gate" class="age-gate-overlay">
-    <div style="background:#111; border:2px solid var(--gold); border-radius:20px; padding:40px; text-align:center;">
-      <h2 style="color:white; margin-bottom: 20px;">Confirm Age</h2>
-      <button onclick="go()" style="padding:12px 35px; background:var(--gold); border:none; font-weight:bold; cursor:pointer;">Yes (18+)</button>
-      <button onclick="hide()" style="padding:12px 35px; background:transparent; color:white; border:1px solid white; cursor:pointer; margin-left:10px;">Close</button>
-    </div>
-  </div>
 
   <div class="bg-layer"></div>
   <div class="main-wrapper">
@@ -106,19 +93,15 @@
       </div>
 
       <div class="social-row">
-        <a class="social-icon" onclick="track('Discord', 'https://discord.com/users/ev1lg3n')"><i class="fab fa-discord"></i></a>
+        <a class="social-icon" onclick="track('Discord', 'https://discord.com/users/1209220675303379046')"><i class="fab fa-discord"></i></a>
         <a class="social-icon" onclick="track('Instagram', 'https://www.instagram.com/evil_dejay')"><i class="fab fa-instagram"></i></a>
         <a class="social-icon" onclick="track('Telegram', 'https://t.me/EvilDejay')"><i class="fab fa-telegram"></i></a>
-        <a class="social-icon" onclick="track('Barq', 'https://barq.app/@DeJay')"><img src="https://r2.guns.lol/12468df9-0fa2-4803-9eff-17382fc79a12.webp" alt="Barq"></a>
-
       </div>
       
-       <div class="btn-list">
-        
-        <div class="links-card" onclick="track('Main | Winters Embrace', 'http://www.winters-embrace.com/')">
-            <span style="display:flex; align-items:center;"><i class="fab fa-x-twitter" style="margin-right:12px;"></i>X (Twitter)</span>
+      <div class="btn-list">
+        <div class="links-card" onclick="track('Main', 'http://www.winters-embrace.com/')">
+            <span>Winters Embrace</span>
         </div>
-
       </div>
       
       <div class="footer">
@@ -128,16 +111,11 @@
   </div>
 
   <script>
-    let url = "";
-    const TRACKER_URL = 'https://link-tracker2.morning-surf-02e1.worke.dev/';
-
+    const TRACKER_URL = 'https://link-tracker2.morning-surf-02e1.workes.dev/';
     function track(name, u) { fetch(TRACKER_URL, { method: 'POST', body: JSON.stringify({ link: name }) }); if (u) window.open(u, '_blank'); }
-    function gate(u, name) { url = u; fetch(TRACKER_URL, { method: 'POST', body: JSON.stringify({ link: name }) }); document.getElementById('age-gate').style.display='flex'; }
-    function hide() { document.getElementById('age-gate').style.display='none'; }
-    function go() { window.open(url, '_blank'); hide(); }
     
-    fetch('https://empty-rice-011f.morning-surf-02e1.worke.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
-
+    fetch('https://empty-rice-011f.morning-surf-02e1.workes.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
+    
     async function updateStatus() {
         try {
             const res = await fetch('https://api.lanyard.rest/v1/users/1209220675303379046');
@@ -146,22 +124,11 @@
                 const d = json.data;
                 const dot = document.getElementById('widget-dot');
                 const text = document.getElementById('widget-activity');
-                
                 const colors = { 'online': '#43b581', 'idle': '#faa61a', 'dnd': '#f04747', 'offline': '#747f8d' };
                 if(dot) dot.style.backgroundColor = colors[d.discord_status] || '#747f8d';
-                
-                if (d.spotify) {
-                    text.innerText = `🎵 ${d.spotify.song} – ${d.spotify.artist}`;
-                } else {
-                    const game = d.activities.find(a => a.type === 0);
-                    if (game) {
-                        text.innerText = `🎮 ${game.name}`;
-                    } else {
-                        text.innerText = d.discord_status.charAt(0).toUpperCase() + d.discord_status.slice(1);
-                    }
-                }
+                text.innerText = d.spotify ? `🎵 ${d.spotify.song}` : (d.activities[0]?.name || 'Online');
             }
-        } catch(e) { console.error("Lanyard-Fehler:", e); }
+        } catch(e) { console.error(e); }
     }
     updateStatus();
     setInterval(updateStatus, 10000);
