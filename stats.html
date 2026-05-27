@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>reekey | Live-Stats</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --neon-green: #00ff08;
+            --royal-purple: #8a2be2;
+            --gold: #d4af37;
+            --card-bg: rgba(20, 20, 20, 0.85);
+        }
+
+        body { 
+            background: var(--bg-color); 
+            color: var(--neon-green); 
+            font-family: -apple-system, sans-serif; 
+            display: flex; justify-content: center; padding: 20px; margin: 0; 
+        }
+
+        .box { 
+            background: var(--card-bg); 
+            padding: 30px; border-radius: 20px; 
+            border: 2px solid var(--gold); 
+            width: 100%; max-width: 600px; 
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        h1 { text-align: center; font-size: 22px; text-transform: uppercase; margin-bottom: 20px; color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+        
+        .views-header { 
+            text-align: center; margin-bottom: 25px; color: white; 
+            font-size: 18px; font-weight: bold; padding: 15px; 
+            background: linear-gradient(90deg, var(--royal-purple) 0%, #000 100%); 
+            border-radius: 12px; border: 1px solid var(--gold);
+        }
+
+        .row { 
+            background: rgba(138, 43, 226, 0.1); 
+            padding: 12px 20px; margin-bottom: 8px; 
+            border-radius: 12px; display: flex; 
+            justify-content: space-between; border-left: 4px solid var(--gold); 
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Live-Statistiken</h1>
+        <div class="views-header" id="page-views">Seitenaufrufe: Lade...</div>
+        
+        <canvas id="statsChart" style="margin-bottom: 30px;"></canvas>
+        
+        <div id="stats-container">Lade Link-Daten...</div>
+    </div>
+
+    <script>
+        fetch('https://link-tracker3.morning-surf-02e1.workers.dev/stats')
+            .then(res => res.json())
+            .then(data => {
+                const views = data['reekey_de_views'] || 0;
+                document.getElementById('page-views').innerText = "Gesamt-Aufrufe: " + views;
+                
+                const listData = Object.entries(data)
+                    .filter(e => e[0] !== 'reekey_de_views')
+                    .sort((a, b) => b[1] - a[1]);
+                
+                const container = document.getElementById('stats-container');
+                container.innerHTML = listData.map(([link, clicks]) => `
+                    <div class="row"><span>${link.replace('_', ' ')}</span><b>${clicks} Klicks</b></div>
+                `).join('');
+
+                new Chart(document.getElementById('statsChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: listData.map(e => e[0].replace('_', ' ')),
+                        datasets: [{
+                            label: 'Klicks',
+                            data: listData.map(e => e[1]),
+                            backgroundColor: '#d4af37' // Gold für das Diagramm
+                        }]
+                    },
+                    options: { 
+                        indexAxis: 'y', 
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            x: { ticks: { color: '#00ff08' } },
+                            y: { ticks: { color: '#d4af37' } }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
