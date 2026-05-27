@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>reekey | Link-Portal</title>
+  
+  <meta property="og:title" content="Reekey's Link-Portal | Alle Profile & Links">
+  <meta property="og:site_name" content="reekey.de">
+  <meta property="og:description" content="Welcome to my official link portal! 🐾">
+  <meta property="og:image" content="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp">
+  <meta property="og:url" content="https://reekey.de/">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/webp" href="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    :root {
+        --bg-color: #050505;
+        --neon-green: #00ff08;
+        --royal-purple: #8a2be2;
+        --gold: #d4af37;
+        --card-bg: rgba(20, 20, 20, 0.85);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body, html { 
+        margin: 0; padding: 0; width: 100%; height: 100%; 
+        background-color: var(--bg-color); color: var(--neon-green); 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+        overflow-x: hidden;
+    }
+    
+    .bg-layer { 
+        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; 
+        background-image: url("https://reekey.de/84bdc93d-a924-42a8-829d-8ceafa6314fd.webp"); 
+        background-size: cover; background-position: center; 
+        background-attachment: fixed; z-index: 1; pointer-events: none;
+    }
+    
+    .main-wrapper { position: relative; z-index: 2; min-height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+    
+    .profile-card { 
+        width: 100%; max-width: 640px; 
+        background: var(--card-bg); backdrop-filter: blur(10px); 
+        border-radius: 20px; border: 2px solid var(--gold); 
+        padding: 35px 25px 50px 25px; text-align: center; position: relative; 
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        animation: slideUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    
+    .avatar-img { width: 130px; height: 130px; border-radius: 35px; object-fit: cover; border: 3px solid var(--gold); box-shadow: 0 0 20px var(--neon-green); }
+    h1 { font-size: 39.5px; font-weight: 600; color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+    .sub-bio { color: var(--gold); font-size: 16px; margin: 5px 0 20px 0; font-weight: 500; }
+    
+    .guns-discord-widget { background: rgba(0, 0, 0, 0.6); border-radius: 20px; padding: 12px 20px; margin: 0 auto 25px auto; width: 100%; max-width: 310px; display: flex; align-items: center; border: 1px solid var(--gold); cursor: pointer; }
+    .widget-status-dot { width: 14px; height: 14px; border-radius: 50%; background-color: #747f8d; border: 3px solid #111; position: absolute; bottom: -2px; right: -2px; }
+    
+    .social-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px; }
+    .social-icon { width: 42px; height: 42px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--gold); text-decoration: none; margin: 5px; transition: 0.3s; }
+    .social-icon:hover { background: var(--gold); color: black; }
+    
+    .links-card { 
+        background: linear-gradient(90deg, var(--royal-purple) 0%, #000 100%); 
+        border: 1px solid var(--gold); padding: 18px 30px; border-radius: 12px; color: white; 
+        font-weight: 600; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; cursor: pointer; transition: 0.3s;
+    }
+    .links-card:hover { border-color: var(--neon-green); transform: scale(1.02); }
+    .badge-18 { font-size: 11px; background: var(--royal-purple); color: white; padding: 2px 8px; border-radius: 6px; border: 1px solid var(--gold); }
+    
+    .age-gate-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; justify-content: center; align-items: center; }
+    .footer { margin-top: 30px; color: var(--gold); font-size: 14px; text-align: center; }
+    .footer a { color: var(--neon-green); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <div id="age-gate" class="age-gate-overlay">
+    <div style="background:#111; border:2px solid var(--gold); border-radius:20px; padding:40px; text-align:center;">
+      <h2 style="color:white; margin-bottom: 20px;">Confirm Age</h2>
+      <button onclick="go()" style="padding:12px 35px; background:var(--gold); border:none; font-weight:bold; cursor:pointer;">Yes (18+)</button>
+      <button onclick="hide()" style="padding:12px 35px; background:transparent; color:white; border:1px solid white; cursor:pointer; margin-left:10px;">Close</button>
+    </div>
+  </div>
+
+  <div class="bg-layer"></div>
+  <div class="main-wrapper">
+    <div class="profile-card">
+      <div class="avatar-box"><img class="avatar-img" src="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp"></div>
+      <h1>reekey</h1>
+      <div class="sub-bio">Hey, glad you found your way here. I'm Reekey, a 27-year-old furry from Germany. 🐾</div>
+      
+      <div class="guns-discord-widget" onclick="track('Discord_Profile', 'https://discord.com/users/1104903295438434365')">
+        <div style="position:relative;">
+            <img style="width:45px; height:45px; border-radius:50%; object-fit:cover; border:2px solid var(--neon-green);" src="https://reekey.de/315ca1f2-f200-4a1c-863b-e412a4d7903c.webp">
+            <div id="widget-dot" class="widget-status-dot"></div>
+        </div>
+        <div style="color:white; text-align:left; margin-left:15px;">
+            <div style="font-weight:700;">reekey_</div>
+            <div id="widget-activity" style="color:var(--neon-green); font-size:12px; font-weight:600;">Loading...</div>
+        </div>
+      </div>
+
+      <div class="social-row">
+        <a class="social-icon" onclick="track('Discord', 'https://discord.com/invite/nRTbXGepUT')"><i class="fab fa-discord"></i></a>
+        <a class="social-icon" onclick="track('Instagram', 'https://instagram.com/reekeyuwu')"><i class="fab fa-instagram"></i></a>
+        <a class="social-icon" onclick="track('Telegram', 'https://t.me/reekeyuwu')"><i class="fab fa-telegram"></i></a>
+      </div>
+      
+      <div class="btn-list">
+        <div class="links-card" onclick="gate('https://onlyfans.com/reekeyuwu', 'OnlyFans')">OnlyFans <span class="badge-18">18+</span></div>
+        <div class="links-card" onclick="track('X_Twitter', 'https://x.com/reekey_')">X (Twitter)</div>
+      </div>
+      
+      <div class="footer">
+        View Counter: <span id="view-count">...</span> | made with ❤️ from <a href="https://Reekey.de">Reekey.de</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let url = "";
+    const TRACKER_URL = 'https://link-tracker2.morning-surf-02e1.worke.dev/';
+
+    function track(name, u) { fetch(TRACKER_URL, { method: 'POST', body: JSON.stringify({ link: name }) }); if (u) window.open(u, '_blank'); }
+    function gate(u, name) { url = u; fetch(TRACKER_URL, { method: 'POST', body: JSON.stringify({ link: name }) }); document.getElementById('age-gate').style.display='flex'; }
+    function hide() { document.getElementById('age-gate').style.display='none'; }
+    function go() { window.open(url, '_blank'); hide(); }
+    
+    fetch('https://empty-rice-011f.morning-surf-02e1.worke.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
+
+    async function updateStatus() {
+        try {
+            const res = await fetch('https://api.lanyard.rest/v1/users/1104903295438434365');
+            const json = await res.json();
+            if (json.success) {
+                const d = json.data;
+                const dot = document.getElementById('widget-dot');
+                const text = document.getElementById('widget-activity');
+                const colors = { 'online': '#43b581', 'idle': '#faa61a', 'dnd': '#f04747', 'offline': '#747f8d' };
+                if(dot) dot.style.backgroundColor = colors[d.discord_status] || '#747f8d';
+                text.innerText = d.spotify ? `🎵 ${d.spotify.song}` : (d.activities[0]?.name || 'Online');
+            }
+        } catch(e) { console.error(e); }
+    }
+    updateStatus();
+    setInterval(updateStatus, 10000);
+  </script>
+</body>
+</html>
