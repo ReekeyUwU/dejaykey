@@ -146,7 +146,7 @@
     function hide() { document.getElementById('age-gate').style.display='none'; }
     function go() { window.open(url, '_blank'); hide(); }
     
-    fetch('https://empty-rice-011f.morning-surf-02e1.workers.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
+    fetch('https://view.morning-surf-02e1.workers.dev/').then(r => r.text()).then(d => document.getElementById('view-count').innerText = d);
     
     async function updateStatus() {
         try {
