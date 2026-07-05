@@ -1,76 +1,97 @@
- let url = "";
+let url = "";
+let discordUserId = "1209220675303379046";
 const TRACKER_URL = 'https://link-tracker3.morning-surf-02e1.workers.dev/track';
-const discordUserId = "1209220675303379046";
 
-function countView() {
-    if (!sessionStorage.getItem('viewed_reekey')) {
-        fetch(TRACKER_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ link: 'reekey_de_views' })
-        }).then(() => {
-            sessionStorage.setItem('viewed_reekey', 'true');
-        }).catch(e => console.error("View-Count konnte nicht gesendet werden:", e));
-    }
+async function loadPageStructure() {
+     const config = await fetch(TRACKER_URL.replace('/track', '/config')).then(res => res.json());
+
+    document.getElementById('avatar').src = config.avatar;
+     document.getElementById('dynamic-favicon').href = config.avatar;
+
+    document.getElementById('live-title').innerText = config.title;
+     document.getElementById('live-bio').innerText = config.bio;
+     document.getElementById('live-bg').style.backgroundImage = `url('${config.background}')`;
+     document.getElementById('card').style.opacity = "1";
+     fetchDynamicLinks();
 }
 
-function track(name, u) {
-    fetch(TRACKER_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ link: name })
-    }).catch(e => console.error("Tracking error:", e));
+function fetchDynamicLinks() {
+     fetch(TRACKER_URL.replace('/track', '/links')).then(res => res.json()).then(links => {
+              const buttonContainer = document.getElementById('dynamic-links-container');
+              const socialContainer = document.getElementById('dynamic-social-container');
+              const widgetArea = document.getElementById('dynamic-widget-area');
+              buttonContainer.innerHTML = ''; socialContainer.innerHTML = '';
 
-    if (u) window.open(u, '_blank');
+                                                                                         const widgetData = links.find(l => l.link_type === 'widget');
+              if (widgetData && widgetArea) {
+                           if(widgetData.url.includes('users/')) discordUserId = widgetData.url.split('users/')[1].replace(/\//g, '');
+                           widgetArea.innerHTML = `<div class="status-widget"><div class="status-row discord-row" onclick="track('${widgetData.title.replace(/ /g, '_')}', '${widgetData.url}')"><div class="avatar-mini"><img src="${document.getElementById('avatar').src}"><div id="widget-dot" class="widget-status-dot"></div></div><div class="widget-info"><div class="widget-name">${widgetData.title}</div><div id="widget-activity" class="widget-activity">Lädt...</div></div><span class="status-chip" id="widget-status-label"></span></div></div>`;
+              }
+
+                                                                                         links.forEach(l => {
+                                                                                                      const trackingName = l.title.replace(/ /g, '_');
+                                                                                                      const iconClass = l.icon ? (l.icon.startsWith('http') || l.icon.includes('simpleicons.org') ? `<img class="dyn-icon-img" src="${l.icon}">` : `<i class="${l.icon}"></i>`) : '<i class="fa-solid fa-link"></i>';
+                                                                                                      if (l.link_type === 'social') {
+                                                                                                                       socialContainer.innerHTML += `<a class="social-icon" onclick="${l.is_nsfw === 1 || l.is_nsfw === true ? `gate('${l.url}', '${trackingName}')` : `track('${trackingName}', '${l.url}')`}">${iconClass}</a>`;
+                                                                                                       } else if (l.link_type === 'button') {
+                                                                                                                       buttonContainer.innerHTML += `<div class="links-card" onclick="${l.is_nsfw === 1 || l.is_nsfw === true ? `gate('${l.url}', '${trackingName}')` : `track('${trackingName}', '${l.url}')`}"><span class="link-label"><span class="link-icon">${iconClass}</span><span class="link-title">${l.title}</span></span><span class="link-meta">${(l.is_nsfw === 1 || l.is_nsfw === true) ? '<span class="badge-18">18+</span>' : '<i class="fa-solid fa-chevron-right chevron"></i>'}</span></div>`;
+                                                                                                       }
+                                                                                         });
+              updateStatus();
+     });
+}
+
+function countView() {
+     if (!sessionStorage.getItem('viewed_reekey')) {
+              fetch(TRACKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ link: 'reekey_de_views' }) }).then(() => {
+                           sessionStorage.setItem('viewed_reekey', 'true');
+                           location.reload();
+              }).catch(() => {});
+     }
+}
+
+fetch(TRACKER_URL.replace('/track', '/view-count'))
+  .then(res => res.json())
+  .then(data => { document.getElementById('view-count').innerText = data.views.toLocaleString('de-DE'); })
+  .catch(err => { document.getElementById('view-count').innerText = "—"; });
+
+function track(name, u) {
+     fetch(TRACKER_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ link: name }) });
+     if (u) window.open(u, '_blank');
 }
 
 function gate(u, name) {
-    url = u;
-    track(name);
-    const el = document.getElementById('age-gate');
-    el.style.display = 'flex';
-    setTimeout(() => el.classList.add('open'), 10);
+     url = u;
+     track(name);
+     const el = document.getElementById('age-gate');
+     el.style.display = 'flex';
+     setTimeout(() => el.classList.add('open'), 10);
 }
 
 function hide() {
-    const el = document.getElementById('age-gate');
-    el.classList.remove('open');
-    setTimeout(() => el.style.display = 'none', 300);
+     const el = document.getElementById('age-gate');
+     el.classList.remove('open');
+     setTimeout(() => el.style.display = 'none', 300);
 }
 
 function go() { window.open(url, '_blank'); hide(); }
 
-fetch('https://view.morning-surf-02e1.workers.dev/')
-    .then(r => r.text())
-    .then(d => { document.getElementById('view-count').innerText = d; })
-    .catch(() => { document.getElementById('view-count').innerText = "—"; });
-
 async function updateStatus() {
-    try {
-        const res = await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`);
-        const json = await res.json();
-        if (!json.success) return;
-
-        const d = json.data;
-        const dot = document.getElementById('widget-dot');
-        const text = document.getElementById('widget-activity');
-        const label = document.getElementById('widget-status-label');
-        const colors = { 'online': '#43b581', 'idle': '#faa61a', 'dnd': '#f04747', 'offline': '#555' };
-        const statusLabelMap = { 'online': 'Online', 'idle': 'Idle', 'dnd': 'DND', 'offline': 'Offline' };
-
-        if (dot) dot.style.backgroundColor = colors[d.discord_status] || '#555';
-        if (label) label.innerText = statusLabelMap[d.discord_status] || '';
-
-        if (d.spotify) {
-            if (text) text.innerText = `🎵 ${d.spotify.song} – ${d.spotify.artist}`;
-        } else {
-            const game = d.activities.find(a => a.type === 0);
-            if (text) text.innerText = game ? `🎮 ${game.name}` : 'Discord';
-        }
-    } catch(e) { console.error("Lanyard-Fehler:", e); }
+     try {
+              const d = (await fetch(`https://api.lanyard.rest/v1/users/${discordUserId}`).then(res => res.json())).data;
+              if(document.getElementById('widget-dot')) document.getElementById('widget-dot').style.backgroundColor = { 'online': '#43b581', 'idle': '#faa61a', 'dnd': '#f04747', 'offline': '#555' }[d.discord_status] || '#555';
+              const statusLabelMap = { 'online': 'Online', 'idle': 'Idle', 'dnd': 'DND', 'offline': 'Offline' };
+              if(document.getElementById('widget-status-label')) document.getElementById('widget-status-label').innerText = statusLabelMap[d.discord_status] || '';
+              const text = document.getElementById('widget-activity');
+              if (d.spotify) {
+                           if (text) text.innerText = `🎵 ${d.spotify.song} – ${d.spotify.artist}`;
+              } else {
+                           const game = d.activities.find(a => a.type === 0);
+                           if (text) text.innerText = game ? `🎮 ${game.name}` : 'Discord';
+              }
+     } catch(e) {}
 }
 
-document.getElementById('card').style.opacity = "1";
+loadPageStructure();
 countView();
-updateStatus();
 setInterval(updateStatus, 10000);
