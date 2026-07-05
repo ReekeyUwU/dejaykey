@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+  <html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Evil_DeJay | Link-Portal</title>
+
+    <meta property="og:title" content="Evil_DeJay | Link-Portal">
+    <meta property="og:site_name" content="dejaykey.de">
+    <meta property="og:description" content="Welcome to my official link portal! 🐾">
+    <meta property="og:image" content="https://dejaykey.de/photo_2026-05-27_23-57-59.jpg">
+    <meta property="og:url" content="https://dejaykey.de/">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/jpeg" href="https://dejaykey.de/photo_2026-05-27_23-50-28.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <div id="age-gate" class="age-gate-overlay">
+      <div class="age-gate-box">
+        <div class="icon-circle"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h2>Confirm Age</h2>
+        <p>This content is restricted to 18+. Are you old enough to continue?</p>
+        <div class="age-gate-actions">
+          <button onclick="go()" class="yes-btn">Yes (18+)</button>
+          <button onclick="hide()" class="no-btn">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-layer" style="background-image: url('https://dejaykey.de/photo_2026-05-27_23-57-59.jpg');"></div>
+    <div class="main-wrapper">
+      <div class="profile-card" id="card">
+        <div>
+          <div class="avatar-box">
+            <img class="avatar-img" src="https://dejaykey.de/photo_2026-05-27_23-50-28.jpg">
+            <div class="avatar-ring"></div>
+            <div class="status-corner"><i class="fa-solid fa-check"></i></div>
+          </div>
+        </div>
+        <div>
+          <h1>Evil_DeJay</h1>
+          <div class="sub-bio">Trans Dragoness (w, LVL.35) 🐾</div>
+      </div>
+
+              <div class="status-widget">
+                <div class="status-row discord-row" onclick="track('Discord_Profile', 'https://discord.com/users/1209220675303379046')">
+                  <div class="avatar-mini">
+                    <img src="https://dejaykey.de/photo_2026-05-27_23-50-28.jpg">
+                    <div id="widget-dot" class="widget-status-dot"></div>
+                  </div>
+                  <div class="widget-info">
+                    <div class="widget-name">Evil_DeJay</div>
+                    <div id="widget-activity" class="widget-activity">Lädt...</div>
+                  </div>
+                  <span class="status-chip" id="widget-status-label"></span>
+                </div>
+              </div>
+
+              <div class="social-row">
+                <a class="social-icon" onclick="track('Discord', 'https://discord.com/users/ev1lg3n')"><i class="fa-brands fa-discord"></i></a>
+                <a class="social-icon" onclick="track('Instagram', 'https://www.instagram.com/evil_dejay')"><i class="fa-brands fa-instagram"></i></a>
+                <a class="social-icon" onclick="track('Telegram', 'https://t.me/EvilDejay')"><i class="fa-brands fa-telegram"></i></a>
+                <a class="social-icon" onclick="track('Barq', 'https://barq.app/@DeJay')"><img class="dyn-icon-img" src="https://r2.guns.lol/12468df9-0fa2-4803-9eff-17382fc79a12.webp"></a>
+              </div>
+
+              <div class="btn-list">
+                <div class="links-card" onclick="track('Main | Winters Embrace', 'https://www.winters-embrace.com/')">
+                  <span class="link-label">
+                    <span class="link-icon"><img class="dyn-icon-img" src="https://reekey.de/photo_2026-05-28_02-22-45.svg"></span>
+                    <span class="link-title">Main | Winters Embrace</span>
+            </span>
+            <span class="link-meta"><i class="fa-solid fa-chevron-right chevron"></i></span>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-links">
+            <span class="view-counter-box">👁 <span id="view-count">...</span></span>
+            <span>·</span>
+            <span><a href="https://reekey.de">reekey.de</a></span>
+          </div>
+          <div class="footer-made-by">
+            © 2026 — made with ❤️ from <a href="https://reekey.de">reekey.de</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/script.js"></script>
+</body>
+</html>
