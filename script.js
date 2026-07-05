@@ -1,4 +1,4 @@
-let url = "";
+ let url = "";
 const TRACKER_URL = 'https://link-tracker3.morning-surf-02e1.workers.dev/track';
 const discordUserId = "1209220675303379046";
 
